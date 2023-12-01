@@ -55,7 +55,7 @@ use ORPTech\MigrationPartition\Support\Facades\Schema;
 
 Schema::createRangePartitioned('[YourTableNameHere]', function (Blueprint $table) {
     //...
-}, '[compositeKeyOne]', '[compositeKeyTwo]', '[rangePartitionKey]');
+}, '[rangePartitionKey]');
 ```
 
 ##### Creating a Range Partition for a Partitioned Table
@@ -84,7 +84,7 @@ use ORPTech\MigrationPartition\Support\Facades\Schema;
 
 Schema::createListPartitioned('[YourTableNameHere]', function (Blueprint $table) {
     //...
-}, '[compositeKeyOne]', '[compositeKeyTwo]', '[listPartitionKey]');
+}, '[listPartitionKey]');
 ```
 
 ##### Creating a List Partition for a Partitioned Table
@@ -113,7 +113,7 @@ use ORPTech\MigrationPartition\Support\Facades\Schema;
 
 Schema::createHashPartitioned('[YourTableNameHere]', function (Blueprint $table) {
     //...
-}, '[compositeKeyOne]', '[compositeKeyTwo]', '[hashPartitionKey]');
+}, '[hashPartitionKey]');
 ```
 
 ##### Creating a Hash Partition for a Partitioned Table

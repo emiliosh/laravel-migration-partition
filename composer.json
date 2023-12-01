@@ -1,12 +1,12 @@
 {
-    "name": "orptech/laravel-migration-partition",
+    "name": "emiliosh/laravel-migration-partition",
     "description": "Laravel extensions for creating migrations with partitions.",
     "keywords": [
         "ORPTech",
         "laravel",
         "laravel-migration-partition"
     ],
-    "homepage": "https://github.com/orptech/laravel-migration-partition",
+    "homepage": "https://github.com/emiliosh/laravel-migration-partition",
     "license": "MIT",
     "authors": [
         {

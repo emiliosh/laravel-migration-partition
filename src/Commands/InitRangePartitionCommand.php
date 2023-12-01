@@ -4,20 +4,17 @@ namespace ORPTech\MigrationPartition\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Pluralizer;
 use ORPTech\MigrationPartition\Support\Facades\Schema;
 
 class InitRangePartitionCommand extends Command
 {
     /**
      * Filesystem instance
-     * @var Filesystem
      */
     protected Filesystem $files;
 
     /**
      * Create a new command instance.
-     * @param Filesystem $files
      */
     public function __construct(Filesystem $files)
     {
@@ -68,10 +65,8 @@ class InitRangePartitionCommand extends Command
      */
     protected $end;
 
-
     /**
      * Handler for the command.
-     *
      */
     public function handle()
     {
@@ -79,7 +74,7 @@ class InitRangePartitionCommand extends Command
         $this->start = $this->ask('Range start value');
         $this->end = $this->ask('Range end value');
         $tables = Schema::getAllRangePartitionedTables();
-        foreach($tables as $table){
+        foreach ($tables as $table) {
             $this->table = $table;
             $path = $this->getSourceFilePath();
             $contents = $this->getSourceFile();
@@ -96,18 +91,18 @@ class InitRangePartitionCommand extends Command
      */
     public function getSourceFilePath()
     {
-        return base_path('database/migrations') . '/'.now()->format('Y_m_d_His').'_create_partition_' . $this->table.'_'.$this->suffix . '_table.php';
+        return base_path('database/migrations').'/'.now()->format('Y_m_d_His').'_create_partition_'.$this->table.'_'.$this->suffix.'_table.php';
     }
 
     /**
      * Build the directory for the class if necessary.
      *
-     * @param string $path
+     * @param  string  $path
      * @return string
      */
     protected function makeDirectory($path)
     {
-        if (!$this->files->isDirectory($path)) {
+        if (! $this->files->isDirectory($path)) {
             $this->files->makeDirectory($path, 0755, true, true);
         }
 
@@ -118,7 +113,6 @@ class InitRangePartitionCommand extends Command
      * Get the stub path and the stub variables.
      *
      * @return array|false|string|string[]
-     *
      */
     public function getSourceFile()
     {
@@ -128,8 +122,6 @@ class InitRangePartitionCommand extends Command
     /**
      * Replace the stub variables(key) with the desire value.
      *
-     * @param $stub
-     * @param array $stubVariables
      * @return array|false|string|string[]
      */
     public function getStubContents($stub, array $stubVariables = [])
@@ -137,7 +129,7 @@ class InitRangePartitionCommand extends Command
         $contents = file_get_contents($stub);
 
         foreach ($stubVariables as $search => $replace) {
-            $contents = str_replace('$' . $search . '$', $replace, $contents);
+            $contents = str_replace('$'.$search.'$', $replace, $contents);
         }
 
         return $contents;
@@ -146,8 +138,8 @@ class InitRangePartitionCommand extends Command
 
     /**
      * Return the stub file path.
-     * @return string
      *
+     * @return string
      */
     public function getStubPath()
     {
@@ -159,7 +151,6 @@ class InitRangePartitionCommand extends Command
      * Map the stub variables present in stub to its value.
      *
      * @return array
-     *
      */
     public function getStubVariables()
     {
@@ -167,7 +158,7 @@ class InitRangePartitionCommand extends Command
             'TABLE' => $this->table,
             'SUFFIX' => $this->suffix,
             'START' => $this->start,
-            'END' => $this->end
+            'END' => $this->end,
         ];
     }
 }

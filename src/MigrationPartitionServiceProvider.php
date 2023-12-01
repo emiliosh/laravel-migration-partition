@@ -4,10 +4,10 @@ namespace ORPTech\MigrationPartition;
 
 use ORPTech\MigrationPartition\Commands\InitHashPartitionCommand;
 use ORPTech\MigrationPartition\Commands\InitListPartitionCommand;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use ORPTech\MigrationPartition\Commands\InitRangePartitionCommand;
 use ORPTech\MigrationPartition\Commands\ListTablePartitionsCommand;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class MigrationPartitionServiceProvider extends PackageServiceProvider
 {
@@ -18,7 +18,7 @@ class MigrationPartitionServiceProvider extends PackageServiceProvider
                 InitRangePartitionCommand::class,
                 InitListPartitionCommand::class,
                 InitHashPartitionCommand::class,
-                ListTablePartitionsCommand::class
+                ListTablePartitionsCommand::class,
             ]);
     }
 }

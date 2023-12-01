@@ -4,20 +4,17 @@ namespace ORPTech\MigrationPartition\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Pluralizer;
 use ORPTech\MigrationPartition\Support\Facades\Schema;
 
 class InitListPartitionCommand extends Command
 {
     /**
      * Filesystem instance
-     * @var Filesystem
      */
     protected Filesystem $files;
 
     /**
      * Create a new command instance.
-     * @param Filesystem $files
      */
     public function __construct(Filesystem $files)
     {
@@ -61,17 +58,15 @@ class InitListPartitionCommand extends Command
      */
     protected $listKey;
 
-
     /**
      * Handler for the command.
-     *
      */
     public function handle()
     {
         $this->suffix = $this->ask('Define your table suffix');
         $this->listKey = $this->ask('Define a key value for this list partition');
         $tables = Schema::getAllListPartitionedTables();
-        foreach($tables as $table){
+        foreach ($tables as $table) {
             $this->table = $table;
             $path = $this->getSourceFilePath();
             $contents = $this->getSourceFile();
@@ -88,18 +83,18 @@ class InitListPartitionCommand extends Command
      */
     public function getSourceFilePath()
     {
-        return base_path('database/migrations') . '/'.now()->format('Y_m_d_His').'_create_partition_' . $this->table.'_'.$this->suffix . '_table.php';
+        return base_path('database/migrations').'/'.now()->format('Y_m_d_His').'_create_partition_'.$this->table.'_'.$this->suffix.'_table.php';
     }
 
     /**
      * Build the directory for the class if necessary.
      *
-     * @param string $path
+     * @param  string  $path
      * @return string
      */
     protected function makeDirectory($path)
     {
-        if (!$this->files->isDirectory($path)) {
+        if (! $this->files->isDirectory($path)) {
             $this->files->makeDirectory($path, 0755, true, true);
         }
 
@@ -110,7 +105,6 @@ class InitListPartitionCommand extends Command
      * Get the stub path and the stub variables.
      *
      * @return array|false|string|string[]
-     *
      */
     public function getSourceFile()
     {
@@ -120,8 +114,6 @@ class InitListPartitionCommand extends Command
     /**
      * Replace the stub variables(key) with the desire value.
      *
-     * @param $stub
-     * @param array $stubVariables
      * @return array|false|string|string[]
      */
     public function getStubContents($stub, array $stubVariables = [])
@@ -129,7 +121,7 @@ class InitListPartitionCommand extends Command
         $contents = file_get_contents($stub);
 
         foreach ($stubVariables as $search => $replace) {
-            $contents = str_replace('$' . $search . '$', $replace, $contents);
+            $contents = str_replace('$'.$search.'$', $replace, $contents);
         }
 
         return $contents;
@@ -138,8 +130,8 @@ class InitListPartitionCommand extends Command
 
     /**
      * Return the stub file path.
-     * @return string
      *
+     * @return string
      */
     public function getStubPath()
     {
@@ -151,7 +143,6 @@ class InitListPartitionCommand extends Command
      * Map the stub variables present in stub to its value.
      *
      * @return array
-     *
      */
     public function getStubVariables()
     {

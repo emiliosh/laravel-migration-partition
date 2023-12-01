@@ -7,20 +7,6 @@ use Illuminate\Database\Schema\Blueprint as IlluminateBlueprint;
 class Blueprint extends IlluminateBlueprint
 {
     /**
-     * Column key one for creating a composite key for a range partitioned table.
-     *
-     * @var string
-     */
-    public $pkCompositeOne;
-
-    /**
-     * Column key two for creating a composite key for range partitioned table.
-     *
-     * @var string
-     */
-    public $pkCompositeTwo;
-
-    /**
      * Partition range key for creating a range partitioned table.
      *
      * @var string
@@ -39,14 +25,14 @@ class Blueprint extends IlluminateBlueprint
      *
      * @var string
      */
-    public $startDate;
+    public $startValue;
 
     /**
      * Partition range key for creating a range partitioned table.
      *
      * @var string
      */
-    public $endDate;
+    public $endValue;
 
     /**
      * Column key for creating a table with list partition.
@@ -188,6 +174,7 @@ class Blueprint extends IlluminateBlueprint
     {
         return $this->addCommand('createHashPartition');
     }
+
     /**
      * Attach a range partition for existing table to the partitioned table.
      *
@@ -237,6 +224,7 @@ class Blueprint extends IlluminateBlueprint
     {
         return $this->addCommand('getPartitions');
     }
+
     /**
      * Indicate that the table needs to be created with a range partition.
      *
@@ -246,5 +234,4 @@ class Blueprint extends IlluminateBlueprint
     {
         return $this->addCommand('detachPartition');
     }
-
 }
