@@ -25,12 +25,10 @@ class Builder extends IlluminateBuilder
      *
      * @throws BindingResolutionException
      */
-    public function createRangePartitioned(string $table, Closure $callback, string $pkCompositeOne, string $pkCompositeTwo, string $rangeKey)
+    public function createRangePartitioned(string $table, Closure $callback, string $rangeKey)
     {
-        $this->build(tap($this->createBlueprint($table), function ($blueprint) use ($callback, $pkCompositeOne, $pkCompositeTwo, $rangeKey) {
+        $this->build(tap($this->createBlueprint($table), function ($blueprint) use ($callback, $rangeKey) {
             $blueprint->createRangePartitioned();
-            $blueprint->pkCompositeOne = $pkCompositeOne;
-            $blueprint->pkCompositeTwo = $pkCompositeTwo;
             $blueprint->rangeKey = $rangeKey;
 
             $callback($blueprint);
@@ -44,13 +42,13 @@ class Builder extends IlluminateBuilder
      *
      * @throws BindingResolutionException
      */
-    public function createRangePartition(string $table, Closure $callback, string $suffixForPartition, string $startDate, string $endDate)
+    public function createRangePartition(string $table, Closure $callback, string $suffixForPartition, string $startValue, string $endValue)
     {
-        $this->build(tap($this->createBlueprint($table), function ($blueprint) use ($callback, $suffixForPartition, $startDate, $endDate) {
+        $this->build(tap($this->createBlueprint($table), function ($blueprint) use ($callback, $suffixForPartition, $startValue, $endValue) {
             $blueprint->createRangePartition();
             $blueprint->suffixForPartition = $suffixForPartition;
-            $blueprint->startDate = $startDate;
-            $blueprint->endDate = $endDate;
+            $blueprint->startValue = $startValue;
+            $blueprint->endValue = $endValue;
 
             $callback($blueprint);
         }));
@@ -63,13 +61,13 @@ class Builder extends IlluminateBuilder
      *
      * @throws BindingResolutionException
      */
-    public function attachRangePartition(string $table, Closure $callback, string $partitionTableName, string $startDate, string $endDate)
+    public function attachRangePartition(string $table, Closure $callback, string $partitionTableName, string $startValue, string $endValue)
     {
-        $this->build(tap($this->createBlueprint($table), function ($blueprint) use ($callback, $partitionTableName, $startDate, $endDate) {
+        $this->build(tap($this->createBlueprint($table), function ($blueprint) use ($callback, $partitionTableName, $startValue, $endValue) {
             $blueprint->attachRangePartition();
             $blueprint->partitionTableName = $partitionTableName;
-            $blueprint->startDate = $startDate;
-            $blueprint->endDate = $endDate;
+            $blueprint->startValue = $startValue;
+            $blueprint->endValue = $endValue;
             $callback($blueprint);
         }));
     }
@@ -81,12 +79,10 @@ class Builder extends IlluminateBuilder
      *
      * @throws BindingResolutionException
      */
-    public function createListPartitioned(string $table, Closure $callback, string $pkCompositeOne, string $pkCompositeTwo, string $listPartitionKey)
+    public function createListPartitioned(string $table, Closure $callback, string $listPartitionKey)
     {
-        $this->build(tap($this->createBlueprint($table), function ($blueprint) use ($callback, $pkCompositeOne, $pkCompositeTwo, $listPartitionKey) {
+        $this->build(tap($this->createBlueprint($table), function ($blueprint) use ($callback, $listPartitionKey) {
             $blueprint->createListPartitioned();
-            $blueprint->pkCompositeOne = $pkCompositeOne;
-            $blueprint->pkCompositeTwo = $pkCompositeTwo;
             $blueprint->listPartitionKey = $listPartitionKey;
 
             $callback($blueprint);
@@ -135,12 +131,10 @@ class Builder extends IlluminateBuilder
      *
      * @throws BindingResolutionException
      */
-    public function createHashPartitioned(string $table, Closure $callback, string $pkCompositeOne, string $pkCompositeTwo, string $hashPartitionKey)
+    public function createHashPartitioned(string $table, Closure $callback,  string $hashPartitionKey)
     {
-        $this->build(tap($this->createBlueprint($table), function ($blueprint) use ($callback, $pkCompositeOne, $pkCompositeTwo, $hashPartitionKey) {
+        $this->build(tap($this->createBlueprint($table), function ($blueprint) use ($callback, $hashPartitionKey) {
             $blueprint->createHashPartitioned();
-            $blueprint->pkCompositeOne = $pkCompositeOne;
-            $blueprint->pkCompositeTwo = $pkCompositeTwo;
             $blueprint->hashPartitionKey = $hashPartitionKey;
             $callback($blueprint);
         }));

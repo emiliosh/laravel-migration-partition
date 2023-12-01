@@ -105,7 +105,7 @@ class PostgresGrammar extends IlluminatePostgresGrammar
     {
         return array_values(array_filter(array_merge([sprintf('create table %s (%s) partition by hash(%s)',
             $this->wrapTable($blueprint),
-            sprintf('%s, %s', implode(', ', $this->getColumns($blueprint)), sprintf('primary key (%s, %s)', $blueprint->pkCompositeOne, $blueprint->pkCompositeTwo)),
+            implode(', ', $this->getColumns($blueprint)),
             $blueprint->hashPartitionKey
         )], $this->compileAutoIncrementStartingValues($blueprint))));
     }
